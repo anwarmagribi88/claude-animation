@@ -7,5 +7,7 @@ canvas{display:block}
  -webkit-text-stroke:18px #000;paint-order:stroke fill;letter-spacing:-2px;text-shadow:0 8px 0 rgba(0,0,0,.35);transform-origin:50% 50%}
 #year{position:absolute;left:60px;top:150px;font:900 150px/1 "Arial Black","DejaVu Sans",Impact,sans-serif;color:#ffd23f;
  -webkit-text-stroke:16px #1a0f2e;paint-order:stroke fill;transform-origin:0 50%}
-</style></head><body><div id="stage"><div id="vig"></div><div id="year"></div><div id="cap"></div></div>
-<script type="importmap">{"imports":{"three":"/three/three.module.js"}}</script><script type="module" src="main.js"></script></body></html>
+#flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+#badge{position:absolute;right:50px;top:330px;font:900 110px/1 "Arial Black","DejaVu Sans",Impact,sans-serif;color:#b6ff3d;-webkit-text-stroke:16px #1a0f2e;paint-order:stroke fill;opacity:0;transform-origin:100% 50%}
+</style></head><body><div id="stage"><div id="vig"></div><div id="flash"></div><div id="badge"></div><div id="year"></div><div id="cap"></div></div>
+<script type="importmap">{"imports":{"three":"/three/three.module.js","three/addons/":"/addons/"}}</script><script type="module" src="main.js"></script></body></html>
