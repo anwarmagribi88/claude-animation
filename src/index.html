@@ -1,0 +1,11 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+html,body{margin:0;background:#000;overflow:hidden}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden}
+canvas{display:block}
+#vig{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,rgba(0,0,0,0) 55%,rgba(20,0,30,.45) 100%);pointer-events:none}
+#cap{position:absolute;left:0;right:0;top:1180px;text-align:center;font:900 112px/1 "Arial Black","DejaVu Sans",Impact,sans-serif;color:#fff;
+ -webkit-text-stroke:18px #000;paint-order:stroke fill;letter-spacing:-2px;text-shadow:0 8px 0 rgba(0,0,0,.35);transform-origin:50% 50%}
+#year{position:absolute;left:60px;top:150px;font:900 150px/1 "Arial Black","DejaVu Sans",Impact,sans-serif;color:#ffd23f;
+ -webkit-text-stroke:16px #1a0f2e;paint-order:stroke fill;transform-origin:0 50%}
+</style></head><body><div id="stage"><div id="vig"></div><div id="year"></div><div id="cap"></div></div>
+<script type="importmap">{"imports":{"three":"/three/three.module.js"}}</script><script type="module" src="main.js"></script></body></html>
