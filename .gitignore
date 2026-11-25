@@ -1,3 +1,5 @@
 node_modules/
 voice/*.onnx
+voice/*.bin
 out/sheet/
+out/still*/
