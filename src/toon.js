@@ -129,6 +129,11 @@ export function makeStick({ body = 0x1c1c24, shoe = 0x5a3320, skin = 0xf4f4fb, g
     const cone = mesh(new THREE.ConeGeometry(0.55, 1.0, 20), 0xdfe8ff, { parent: hats, o: 0.025 }); cone.position.set(0.1, 0.55, 0); cone.rotation.z = -0.6;
     const pom = mesh(sphere(0.12), 0xffffff, { parent: hats, o: 0.015 }); pom.position.set(0.4, 0.95, 0);
     const rim = mesh(new THREE.TorusGeometry(0.58, 0.08, 10, 32), 0xffffff, { parent: hats, o: 0.012 }); rim.rotation.x = PI / 2; rim.position.y = 0.28;
+  } else if (hat === 'officer') {
+    const crown = mesh(cyl(0.62, 0.34, 28), hatColor, { parent: hats, o: 0.025 }); crown.position.set(0, 0.62, 0.02); crown.scale.set(1, 1, 0.95);
+    const band = mesh(cyl(0.64, 0.1, 28), 0x14101c, { parent: hats, o: 0.01 }); band.position.set(0, 0.5, 0.02);
+    const peak = mesh(box(0.8, 0.04, 0.4), 0x14101c, { parent: hats, o: 0.015 }); peak.position.set(0, 0.46, 0.62); peak.rotation.x = 0.15;
+    const bd = mesh(sphere(0.07), 0xffd23f, { parent: hats, o: 0.008 }); bd.position.set(0, 0.64, 0.64);
   } else if (hat === 'wig') {
     const w = mesh(sphere(0.72), 0xf4f1ea, { parent: hats, o: 0.03 }); w.position.set(0, 0.24, -0.16); w.scale.set(1.08, 0.95, 1.0);
     for (const sx of [-1, 1]) for (const yy of [-0.1, -0.38]) { const c = mesh(sphere(0.2), 0xf4f1ea, { parent: hats, o: 0.02 }); c.position.set(sx * 0.62, yy, -0.05); }
