@@ -93,9 +93,9 @@ const mustacheTex = canvasTex(256, 128, (x) => {
 export function setMouth(h, kind) { const m = h.userData.mouth; if (m.userData.kind !== kind) { m.material.map = mouths[kind]; m.material.needsUpdate = true; m.userData.kind = kind; } }
 
 // ---------- stickman ----------
-export function makeStick({ body = 0x1c1c24, shoe = 0x5a3320, skin = 0xf4f4fb, glasses = false, mustache = false, tie = null, hat = null, hatColor = 0xf3f1e8, wrap = false, armWrap = false } = {}) {
+export function makeStick({ body = 0x1c1c24, shoe = 0x5a3320, skin = 0xf4f4fb, glasses = false, mustache = false, tie = null, hat = null, hatColor = 0xf3f1e8, wrap = false, armWrap = false, belly = 1 } = {}) {
   const g = new THREE.Group();
-  const torso = mesh(sphere(0.5), body, { parent: g, o: 0.025 }); torso.scale.set(1, 1.25, 0.9); torso.position.y = 1.0;
+  const torso = mesh(sphere(0.5), body, { parent: g, o: 0.025 }); torso.scale.set(belly, 1.25, 0.9 * (belly > 1 ? 1.15 : 1)); torso.position.y = 1.0;
   if (tie) { const t = mesh(box(0.12, 0.5, 0.03), tie, { parent: g, o: 0.012 }); t.position.set(0, 1.2, 0.44); t.rotation.x = -0.12; }
   const head = new THREE.Group(); head.position.y = 2.0; g.add(head);
   const skull = mesh(sphere(0.62), skin, { parent: head, o: 0.035 }); skull.scale.set(1, 1.04, 0.96);
@@ -120,6 +120,18 @@ export function makeStick({ body = 0x1c1c24, shoe = 0x5a3320, skin = 0xf4f4fb, g
     const crown = mesh(cyl(0.42, 0.42, 24), hatColor, { parent: hats, o: 0.025 }); crown.position.set(0, 0.62, 0);
     const band = mesh(cyl(0.435, 0.1, 24), 0x5a2a2a, { parent: hats, o: 0.01 }); band.position.set(0, 0.5, 0);
     const brim = mesh(cyl(0.88, 0.05, 32), hatColor, { parent: hats, o: 0.02 }); brim.position.set(0, 0.4, 0.04); brim.rotation.z = 0.04;
+  }
+  else if (hat === 'top') {
+    const crown = mesh(cyl(0.38, 0.7, 24), hatColor, { parent: hats, o: 0.025 }); crown.position.y = 0.78;
+    const band = mesh(cyl(0.39, 0.1, 24), 0xc0322e, { parent: hats, o: 0.01 }); band.position.y = 0.52;
+    const brim = mesh(cyl(0.68, 0.05, 32), hatColor, { parent: hats, o: 0.02 }); brim.position.y = 0.45;
+  } else if (hat === 'nightcap') {
+    const cone = mesh(new THREE.ConeGeometry(0.55, 1.0, 20), 0xdfe8ff, { parent: hats, o: 0.025 }); cone.position.set(0.1, 0.55, 0); cone.rotation.z = -0.6;
+    const pom = mesh(sphere(0.12), 0xffffff, { parent: hats, o: 0.015 }); pom.position.set(0.4, 0.95, 0);
+    const rim = mesh(new THREE.TorusGeometry(0.58, 0.08, 10, 32), 0xffffff, { parent: hats, o: 0.012 }); rim.rotation.x = PI / 2; rim.position.y = 0.28;
+  } else if (hat === 'wig') {
+    const w = mesh(sphere(0.72), 0xf4f1ea, { parent: hats, o: 0.03 }); w.position.set(0, 0.24, -0.16); w.scale.set(1.08, 0.95, 1.0);
+    for (const sx of [-1, 1]) for (const yy of [-0.1, -0.38]) { const c = mesh(sphere(0.2), 0xf4f1ea, { parent: hats, o: 0.02 }); c.position.set(sx * 0.62, yy, -0.05); }
   }
   const wraps = new THREE.Group(); head.add(wraps); wraps.visible = !!wrap;
   const gauze = 0xf1e8d2;
