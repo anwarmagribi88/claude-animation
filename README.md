@@ -34,3 +34,12 @@ Scenes: hook · Hiroshima · first blast · survived · the train · "Nagasaki."
 
 1. `python3 tools/audio_beer.py` — narration, score, sfx cued to words -> `audio/beer_mix.wav`, `src/beer.timing.json`.
 2. `PAGE=beer.html AUDIO=audio/beer_mix.wav node tools/render.mjs out/london_beer_flood_short.mp4`
+
+---
+
+# Operation Mincemeat (1943) — YouTube Short
+1080x1920, 30 fps, 53 s. `out/operation_mincemeat_short.mp4` + `out/mincemeat_captions.srt`. User-supplied narration; tense pizzicato spy score;
+dynamic wall map (fake invasion arrow, German troops redirected, real target).
+
+1. `python3 tools/audio_mincemeat.py` -> `audio/mincemeat_mix.wav`, `src/mincemeat.timing.json`.
+2. `PAGE=mincemeat.html AUDIO=audio/mincemeat_mix.wav node tools/render.mjs out/operation_mincemeat_short.mp4`
