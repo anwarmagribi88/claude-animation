@@ -25,3 +25,12 @@ Same toon-stickman style, plus a shared `src/toon.js` (bandages, hard hat, fedor
    Stills: `PAGE=yamaguchi.html node tools/render.mjs out/still 12 24 40`.
 
 Scenes: hook · Hiroshima · first blast · survived · the train · "Nagasaki." · boss disbelief · second flash · aftermath · paper cranes/memorial.
+
+---
+
+# The London Beer Flood (1814) — YouTube Short
+1080x1920, 30 fps, 54.5 s. `out/london_beer_flood_short.mp4` + `out/beer_captions.srt`. User-supplied narration, animated with the same toon style
+(new: top hat, nightcap, judge's wig, big-bellied owner). Comedic oompah score that drops to a quiet pad for the casualties line.
+
+1. `python3 tools/audio_beer.py` — narration, score, sfx cued to words -> `audio/beer_mix.wav`, `src/beer.timing.json`.
+2. `PAGE=beer.html AUDIO=audio/beer_mix.wav node tools/render.mjs out/london_beer_flood_short.mp4`
