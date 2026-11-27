@@ -43,3 +43,13 @@ dynamic wall map (fake invasion arrow, German troops redirected, real target).
 
 1. `python3 tools/audio_mincemeat.py` -> `audio/mincemeat_mix.wav`, `src/mincemeat.timing.json`.
 2. `PAGE=mincemeat.html AUDIO=audio/mincemeat_mix.wav node tools/render.mjs out/operation_mincemeat_short.mp4`
+
+---
+
+# The Antikythera Mechanism — YouTube Short
+1080x1920, 30 fps, 64.5 s. `out/antikythera_mechanism_short.mp4` + `out/antikythera_captions.srt`.
+Uses the **supplied narration** (`audio/source/antikythera_narration.mp3`, untouched); word timing is derived from its speech segments
+(silence detection + weighted spread + snap to energy dips), with a mysterious score and sfx cued to words underneath.
+
+1. `python3 tools/audio_antikythera.py` -> `audio/antikythera_mix.wav`, `src/antikythera.timing.json`, `out/antikythera_captions.srt`.
+2. `PAGE=antikythera.html AUDIO=audio/antikythera_mix.wav node tools/render.mjs out/antikythera_mechanism_short.mp4`
