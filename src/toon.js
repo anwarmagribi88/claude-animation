@@ -93,7 +93,7 @@ const mustacheTex = canvasTex(256, 128, (x) => {
 export function setMouth(h, kind) { const m = h.userData.mouth; if (m.userData.kind !== kind) { m.material.map = mouths[kind]; m.material.needsUpdate = true; m.userData.kind = kind; } }
 
 // ---------- stickman ----------
-export function makeStick({ body = 0x1c1c24, shoe = 0x5a3320, skin = 0xf4f4fb, glasses = false, mustache = false, tie = null, hat = null, hatColor = 0xf3f1e8, wrap = false, armWrap = false, belly = 1 } = {}) {
+export function makeStick({ body = 0x1c1c24, shoe = 0x5a3320, skin = 0xf4f4fb, glasses = false, mustache = false, tie = null, hat = null, hatColor = 0xf3f1e8, wrap = false, armWrap = false, belly = 1, beard = null } = {}) {
   const g = new THREE.Group();
   const torso = mesh(sphere(0.5), body, { parent: g, o: 0.025 }); torso.scale.set(belly, 1.25, 0.9 * (belly > 1 ? 1.15 : 1)); torso.position.y = 1.0;
   if (tie) { const t = mesh(box(0.12, 0.5, 0.03), tie, { parent: g, o: 0.012 }); t.position.set(0, 1.2, 0.44); t.rotation.x = -0.12; }
@@ -109,6 +109,7 @@ export function makeStick({ body = 0x1c1c24, shoe = 0x5a3320, skin = 0xf4f4fb, g
   const mouth = texPlane(0.42, 0.21, mouths.grin, head); mouth.position.set(0, -0.27, 0.585); mouth.userData.kind = 'grin';
   mouth.material = mouth.material.clone();
   if (mustache) { const m = texPlane(0.4, 0.2, mustacheTex, head); m.position.set(0, -0.1, 0.606); m.rotation.x = 0; }
+  if (beard !== null) { const b = mesh(sphere(0.42), beard, { parent: head, o: 0.025 }); b.scale.set(1.0, 0.75, 0.8); b.position.set(0, -0.68, 0.26); }
   if (glasses) { const gl = texPlane(0.62, 0.2, glassesTex, head); gl.position.set(0, 0.02, 0.62); }
   // hats / bandages (toggle with .visible)
   const hats = new THREE.Group(); head.add(hats);
@@ -134,6 +135,13 @@ export function makeStick({ body = 0x1c1c24, shoe = 0x5a3320, skin = 0xf4f4fb, g
     const band = mesh(cyl(0.64, 0.1, 28), 0x14101c, { parent: hats, o: 0.01 }); band.position.set(0, 0.5, 0.02);
     const peak = mesh(box(0.8, 0.04, 0.4), 0x14101c, { parent: hats, o: 0.015 }); peak.position.set(0, 0.46, 0.62); peak.rotation.x = 0.15;
     const bd = mesh(sphere(0.07), 0xffd23f, { parent: hats, o: 0.008 }); bd.position.set(0, 0.64, 0.64);
+  } else if (hat === 'laurel') {
+    const r = mesh(new THREE.TorusGeometry(0.6, 0.05, 8, 40), 0x4f8a3a, { parent: hats, o: 0.012 }); r.rotation.x = PI / 2; r.position.y = 0.3;
+    for (let i = 0; i < 12; i++) { const a = i / 12 * 2 * PI; const l = mesh(new THREE.ConeGeometry(0.07, 0.24, 6), 0x5aa044, { parent: hats, o: 0.008 }); l.position.set(Math.sin(a) * 0.62, 0.34, Math.cos(a) * 0.62); l.rotation.set(Math.cos(a) * 0.9, 0, -Math.sin(a) * 0.9); }
+  } else if (hat === 'diver') {
+    const glass = new THREE.Mesh(sphere(0.88), new THREE.MeshToonMaterial({ color: 0xaee8ff, transparent: true, opacity: 0.3, depthWrite: false })); glass.position.y = 0.02; hats.add(glass);
+    const col = mesh(new THREE.TorusGeometry(0.74, 0.16, 12, 36), 0xc9922a, { parent: hats, o: 0.02 }); col.rotation.x = PI / 2; col.position.y = -0.62;
+    const cap = mesh(cyl(0.12, 0.2, 12), 0xc9922a, { parent: hats, o: 0.015 }); cap.position.y = 0.9;
   } else if (hat === 'wig') {
     const w = mesh(sphere(0.72), 0xf4f1ea, { parent: hats, o: 0.03 }); w.position.set(0, 0.24, -0.16); w.scale.set(1.08, 0.95, 1.0);
     for (const sx of [-1, 1]) for (const yy of [-0.1, -0.38]) { const c = mesh(sphere(0.2), 0xf4f1ea, { parent: hats, o: 0.02 }); c.position.set(sx * 0.62, yy, -0.05); }
